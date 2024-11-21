@@ -1,0 +1,2 @@
+# aicode-rules
+awesome rules
