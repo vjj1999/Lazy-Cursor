@@ -2,254 +2,224 @@
 
 > A guide showcasing backend development best practices and their evolution, based on real project experience
 
-## Why These Rules? 🤔
+## Project Migration Guide 🔄
 
-In real development, we often face these challenges:
-- Inconsistent code structure
-- Chaotic error handling
-- Unclear business logic layering
-- Difficult project maintenance
+To adapt these guidelines for your project:
 
-This ruleset demonstrates how we solve these problems step by step.
-
-## Technology Stack Evolution 📚
-
-### Gin Framework Selection Journey
-
-**Initial Problem:**
-```go
-// Issues with direct net/http usage
-http.HandleFunc("/api/user", func(w http.ResponseWriter, r *http.Request) {
-    // Repetitive routing logic
-    // Difficult middleware management
-    // Cumbersome parameter validation
-})
+1. In COMPOSER, enter the following text:
+```
+View project guidance tags in .cursorrules. Replace the project guidance tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project specifications.
 ```
 
-**Solution:**
-```go
-// Improvements with Gin framework
-r := gin.Default()
-r.POST("/api/user", func(c *gin.Context) {
-    // Unified middleware
-    // Convenient parameter binding
-    // Standardized error handling
-})
+2. This will generate customized project guidelines based on your specific project structure and middleware requirements.
+
+## Project Structure 📁
+
+```
+.
+├── api/            # API documentation and Swagger files
+├── controller/     # HTTP handlers
+├── logic/         # Business logic
+├── repository/    
+│   ├── dto/      # Request objects
+│   ├── vo/       # Response objects
+│   └── model/    # Database models
+├── services/      
+│   ├── xxx_service/  # Complex business services
+│   └── xxx/         # Utility services
+├── middleware/    # Global middleware
+├── third_party/  # Third-party integrations
+├── constant/
+│   └── errcode/  # Error codes
+├── tests/        # Test files
+├── util/         # Utility functions
+└── scripts/      # Database migration scripts
 ```
 
-### Message Queue Integration (RabbitMQ)
+## Layer Standards Evolution 🏗️
 
-**Evolution Process:**
-1. Initial Direct Processing
+### Controller Layer
+
 ```go
-// Synchronous processing causing response delays
-func ProcessOrder(order Order) {
-    // Direct order processing
-    // Send email
-    // Update inventory
-}
-```
-
-2. After Queue Integration
-```go
-// Improved performance with async processing
-func ProcessOrder(order Order) {
-    // Send to message queue
-    rabbitmq.Publish("orders", order)
-}
-
-func OrderConsumer() {
-    // Async order processing logic
-}
-```
-
-## Architectural Layer Practices 🏗️
-
-### Why This Layering?
-
-Showing evolution from chaos to clarity:
-
-**Early Code:**
-```go
-// All logic mixed together
-func HandleUser(c *gin.Context) {
-    // Parameter validation
-    // Business logic
-    // Database operations
-    // Error handling
-    // Response return
-}
-```
-
-**After Layering:**
-```go
-// Controller Layer - HTTP Request Handling
+// Controller standards
 func (ctrl *UserController) Create(c *gin.Context) {
-    var req CreateUserRequest
+    // Use application.TraceCtx(ctx)
+    ctx := application.TraceCtx(c.Request.Context())
+    
+    // Validate input with ShouldBind
+    var req dto.CreateUserRequest
     if err := c.ShouldBindJSON(&req); err != nil {
-        return
+        return echo.Error(c, errcode.InvalidParams, err)
     }
-    user, err := ctrl.logic.CreateUser(req)
-    // ...
+    
+    // Call logic layer
+    user, err := ctrl.logic.CreateUser(ctx, req)
+    if err != nil {
+        return echo.Error(c, err)
+    }
+    
+    return echo.Success(c, user)
+}
+```
+
+### Logic Layer
+
+```go
+// Logic standards
+func (l *UserLogic) CreateUser(ctx context.Context, req dto.CreateUserRequest) (*vo.UserVO, error) {
+    // Business validation
+    if err := l.validateUser(ctx, req); err != nil {
+        return nil, errs.NewBusinessErr(errs.ValidationFailed, err.Error())
+    }
+    
+    // Transaction handling
+    tx := model.BeginCtxTx(ctx)
+    defer tx.Rollback()
+    
+    // Create user
+    user, err := l.userRepo.Create(ctx, req.ToModel())
+    if err != nil {
+        return nil, err
+    }
+    
+    if err := tx.Commit(); err != nil {
+        return nil, err
+    }
+    
+    return vo.FromUser(user), nil
+}
+```
+
+### Service Layer
+
+```go
+// Service standards
+type UserService struct {
+    Ctx context.Context
+    repo UserRepository
 }
 
-// Logic Layer - Business Logic
-func (l *UserLogic) CreateUser(req CreateUserRequest) (*User, error) {
-    // Business rule validation
-    // Multiple service calls
+func NewUserService(ctx context.Context, repo UserRepository) *UserService {
+    return &UserService{
+        Ctx: ctx,
+        repo: repo,
+    }
 }
 
-// Service Layer - Domain Services
-func (s *UserService) Create(user *User) error {
-    // Single domain logic
+func (s *UserService) Create(ctx context.Context, user *model.User) error {
+    // Domain logic with proper error handling
+    if err := s.validateUserDomain(user); err != nil {
+        return errs.NewBusinessErr(errs.ValidationFailed, err.Error())
+    }
+    
+    return s.repo.Create(ctx, user)
 }
+```
 
-// Repository Layer - Data Access
-func (r *UserRepository) Create(user *User) error {
-    // Database operations
+## Logging Standards 📝
+
+```go
+// Structured logging with proper context
+func (s *Service) ProcessOrder(ctx context.Context, order *Order) error {
+    // Error level
+    if err := s.validate(order); err != nil {
+        cdslog.W(ctx).Error("order validation failed",
+            zap.String("order_id", order.ID),
+            zap.Error(err))
+        return err
+    }
+    
+    // Info level
+    cdslog.W(ctx).Info("processing order",
+        zap.String("order_id", order.ID),
+        zap.String("status", order.Status))
+        
+    // Debug level
+    cdslog.W(ctx).Debug("order details",
+        zap.Any("order", order))
+        
+    return nil
 }
 ```
 
 ## Testing Evolution 🧪
 
-### Unit Testing Journey
-
-**Initial Approach:**
 ```go
-// Basic test without mocks
-func TestCreateUser(t *testing.T) {
-    user := CreateUser("test@example.com")
-    if user.Email != "test@example.com" {
-        t.Error("email not set correctly")
-    }
-}
-```
-
-**Evolved Testing Practice:**
-```go
-// Using test tables and mocks
-func TestUserService_Create(t *testing.T) {
+// Integration test with test containers
+func TestIntegration_UserFlow(t *testing.T) {
+    // Setup test containers
+    postgres, err := testcontainers.NewPostgresContainer()
+    require.NoError(t, err)
+    defer postgres.Terminate(context.Background())
+    
+    // Initialize test application
+    app := NewTestApplication(postgres.GetDSN())
+    
+    // Test cases
     tests := []struct {
         name    string
-        input   CreateUserRequest
-        mock    func(*MockRepo)
-        wantErr bool
+        request dto.CreateUserRequest
+        want    int
     }{
         {
-            name: "successful creation",
-            input: CreateUserRequest{
+            name: "valid user creation",
+            request: dto.CreateUserRequest{
                 Email: "test@example.com",
             },
-            mock: func(m *MockRepo) {
-                m.EXPECT().
-                    Create(gomock.Any()).
-                    Return(nil)
-            },
-            wantErr: false,
+            want: http.StatusOK,
         },
-        // More test cases...
     }
     
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            // Test implementation
+            resp := app.CreateUser(tt.request)
+            assert.Equal(t, tt.want, resp.Code)
         })
     }
 }
 ```
 
-### Integration Testing Framework
+## Error Handling Standards ⚠️
 
 ```go
-// Integration test setup
-func TestIntegration_UserFlow(t *testing.T) {
-    // Use test containers for dependencies
-    postgres, err := testcontainers.NewPostgresContainer()
+// Error definition
+var (
+    ErrUserNotFound = errs.NewBusinessErr(40001, "user not found")
+    ErrInvalidInput = errs.NewBusinessErr(40002, "invalid input parameters")
+)
+
+// Error handling in service
+func (s *Service) GetUser(ctx context.Context, id string) (*User, error) {
+    user, err := s.repo.Find(ctx, id)
     if err != nil {
-        t.Fatal(err)
+        if errors.Is(err, sql.ErrNoRows) {
+            return nil, ErrUserNotFound
+        }
+        // Log error with trace ID
+        cdslog.W(ctx).Error("failed to find user",
+            zap.String("user_id", id),
+            zap.Error(err))
+        return nil, err
     }
-    defer postgres.Terminate(context.Background())
-
-    // Test full flow
-    app := NewTestApplication(postgres.GetDSN())
-    response := app.CreateUser(CreateUserRequest{
-        Email: "test@example.com",
-    })
-    
-    assert.Equal(t, http.StatusOK, response.Code)
-}
-```
-
-### Mock Strategies
-
-```go
-// Interface-based mocking
-type UserRepository interface {
-    Create(context.Context, *User) error
-    Find(context.Context, string) (*User, error)
-}
-
-// Mock implementation
-type MockUserRepository struct {
-    mock.Mock
-}
-
-func (m *MockUserRepository) Create(ctx context.Context, user *User) error {
-    args := m.Called(ctx, user)
-    return args.Error(0)
-}
-```
-
-## Error Handling Evolution ⚠️
-
-```go
-// Early error handling
-if err != nil {
-    c.JSON(500, gin.H{"error": err.Error()})
-    return
-}
-
-// Improved business error handling
-if err != nil {
-    return errs.NewBusinessErr(errs.UserNotFound, "user not found")
+    return user, nil
 }
 
 // Standardized error response
-{
-    "code": 40001,
-    "message": "user not found",
-    "data": null
-}
-```
-
-## Project-Specific Practices 🌟
-
-### OSS Integration
-```go
-// Evolution from simple upload to complete file management
-type OSSService interface {
-    UploadFile(ctx context.Context, file *File) (*FileInfo, error)
-    GetSignedURL(ctx context.Context, objectKey string) (string, error)
-    // ...
-}
-```
-
-### Payment System Evolution
-```go
-// Modular payment system design
-type PaymentService interface {
-    // Support multiple payment channels
-    CreateOrder(ctx context.Context, req *CreateOrderRequest) (*Order, error)
-    ProcessCallback(ctx context.Context, params map[string]string) error
+type ErrorResponse struct {
+    Code    int         `json:"code"`
+    Message string      `json:"message"`
+    Data    interface{} `json:"data,omitempty"`
 }
 ```
 
 ## Continuous Improvement 🔄
 
-Our ruleset continues to evolve with the project:
-- New tech stack best practices
-- Performance optimization experiences
+Our guidelines continue to evolve with:
+- New technology stack best practices
+- Performance optimization patterns
 - Security measures
-- New feature architectural solutions
+- Architectural solutions
 - Testing coverage requirements
 - CI/CD pipeline improvements
+
+Remember to regularly check .cursorrules for the latest standards and update your implementation accordingly.
