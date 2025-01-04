@@ -8,7 +8,7 @@ To adapt these guidelines for your project:
 
 1. In COMPOSER, enter the following text:
 ```
-View project guidance tags in .cursorrules. Replace the project guidance tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project specifications.
+View <project_guidelines> tags in .cursorrules. Replace the <project_guidelines> tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines.
 ```
 
 2. This will generate customized project guidelines based on your specific project structure and middleware requirements.
