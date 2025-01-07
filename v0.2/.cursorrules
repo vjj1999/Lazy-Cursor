@@ -272,153 +272,90 @@
 </anthropic_thinking_protocol>
 
 <workflow>
-  <problem_analysis>
-    <thinking ref="anthropic_thinking_protocol/multiple_hypotheses_generation">
-      - List possible problem hypotheses
-      - Analyze from different perspectives
-      - Question surface issues
-      - Identify root causes
-    </thinking>
+  <thinking_to_action>
+    <practice ref="anthropic_thinking_protocol/core_thinking_sequence">
+      - Transform thinking into concrete tasks
+      - Apply project guidelines to implementation
+      - Document decision rationale
+      - Track assumptions and constraints
+    </practice>
 
-    <discovery ref="anthropic_thinking_protocol/natural_discovery_flow">
-      - Collect key information
-      - Observe characteristic features
-      - Discover potential patterns
-      - Form initial understanding
-    </discovery>
-
-    <validation ref="anthropic_thinking_protocol/verification_and_correction">
-      - Validate hypotheses
-      - Eliminate misconceptions
-      - Clarify core issues
-      - Determine impact scope
+    <validation ref="project_guidelines">
+      - Verify against project standards
+      - Check implementation completeness
+      - Test functionality and quality
+      - Review documentation
     </validation>
 
-    <synthesis ref="anthropic_thinking_protocol/pattern_synthesis">
-      - Summarize problem patterns
-      - Extract key characteristics
-      - Define solution scope
-      - Identify potential risks
-    </synthesis>
+    <refinement ref="anthropic_thinking_protocol/verification_and_correction">
+      - Identify gaps between thinking and implementation
+      - Analyze guideline violations
+      - Improve understanding of standards
+      - Update approach based on findings
+    </refinement>
+  </thinking_to_action>
 
-    <checklist>
-      - Sufficient questioning of surface issues
-      - Hypothesis validation
-      - Core problem identification
-      - Clear boundary definition
-    </checklist>
-  </problem_analysis>
+  <verification_loop>
+    <check_output>
+      <code_review ref="project_guidelines/layer_standards">
+        - Verify implementation matches design
+        - Check compliance with standards
+        - Identify potential issues
+      </code_review>
 
-  <solution_design>
-    <thinking ref="anthropic_thinking_protocol/multiple_hypotheses_generation">
-      - Propose multiple solutions
-      - Consider different approaches
-      - Explore innovative methods
-      - Reference existing experience
-    </thinking>
+      <thinking_review ref="anthropic_thinking_protocol/verification_and_correction">
+        - Review thinking process effectiveness
+        - Validate assumptions
+        - Check reasoning completeness
+      </thinking_review>
 
-    <discovery ref="anthropic_thinking_protocol/natural_discovery_flow">
-      - Analyze solution feasibility
-      - Evaluate implementation costs
-      - Predict potential issues
-      - Weigh pros and cons
-    </discovery>
+      <pattern_capture ref="anthropic_thinking_protocol/pattern_synthesis">
+        - Document effective approaches
+        - Record solution patterns
+        - Note common pitfalls
+      </pattern_capture>
+    </check_output>
 
-    <validation ref="anthropic_thinking_protocol/verification_and_correction">
-      - Verify solution rationality
-      - Confirm standard compliance
-      - Check dependency completeness
-      - Assess risk controllability
-    </validation>
+    <feedback>
+      <to_thinking ref="anthropic_thinking_protocol/strategic_meta_cognition">
+        - Document implementation challenges
+        - Analyze thinking gaps
+        - Suggest process improvements
+      </to_thinking>
 
-    <synthesis ref="anthropic_thinking_protocol/pattern_synthesis">
-      - Refine implementation plan
-      - Break down task steps
-      - Define acceptance criteria
-      - Develop contingency plans
-    </synthesis>
+      <to_guidelines ref="project_guidelines">
+        - Identify standard application issues
+        - Propose guideline improvements
+        - Share best practices
+      </to_guidelines>
 
-    <checklist>
-      - Comprehensive consideration
-      - Practical feasibility
-      - Standards compliance
-      - Controlled risks
-    </checklist>
-  </solution_design>
+      <to_practice>
+        - Review effectiveness
+        - Identify challenges
+        - Consider improvements
+      </to_practice>
+    </feedback>
 
-  <implementation>
-    <thinking ref="anthropic_thinking_protocol/multiple_hypotheses_generation">
-      - Consider implementation strategies
-      - Anticipate technical challenges
-      - Prepare alternative approaches
-      - Consider optimization opportunities
-    </thinking>
+    <adapt_and_improve>
+      <thinking_process ref="anthropic_thinking_protocol">
+        - Update thinking strategies
+        - Refine analysis methods
+        - Improve problem-solving
+      </thinking_process>
 
-    <discovery ref="anthropic_thinking_protocol/natural_discovery_flow">
-      - Code implementation
-      - Unit testing
-      - Code review
-      - Continuous optimization
-    </discovery>
+      <implementation ref="project_guidelines">
+        - Enhance practices
+        - Optimize standards
+        - Share patterns
+      </implementation>
 
-    <validation ref="anthropic_thinking_protocol/verification_and_correction">
-      - Verify functional correctness
-      - Confirm performance targets
-      - Check code standards
-      - Evaluate implementation quality
-    </validation>
-
-    <synthesis ref="anthropic_thinking_protocol/pattern_synthesis">
-      - Summarize technical points
-      - Extract solution patterns
-      - Compile best practices
-      - Complete related documentation
-    </synthesis>
-
-    <checklist>
-      - Complete implementation
-      - Sufficient testing
-      - Standards compliance
-      - Performance targets met
-    </checklist>
-  </implementation>
-
-  <verification>
-    <thinking ref="anthropic_thinking_protocol/multiple_hypotheses_generation">
-      - Design verification plan
-      - Identify key verification points
-      - Anticipate failure scenarios
-      - Prepare response measures
-    </thinking>
-
-    <discovery ref="anthropic_thinking_protocol/natural_discovery_flow">
-      - Execute functional tests
-      - Perform performance tests
-      - Verify exception handling
-      - Check boundary conditions
-    </discovery>
-
-    <validation ref="anthropic_thinking_protocol/verification_and_correction">
-      - Analyze test results
-      - Investigate and locate issues
-      - Fix and verify problems
-      - Confirm through regression testing
-    </validation>
-
-    <synthesis ref="anthropic_thinking_protocol/pattern_synthesis">
-      - Summarize verification results
-      - Compile solution patterns
-      - Enhance contingency plans
-      - Update related documentation
-    </synthesis>
-
-    <checklist>
-      - Comprehensive testing
-      - Issues resolved
-      - Stable and reliable
-      - Ready for delivery
-    </checklist>
-  </verification>
+      <knowledge_base>
+        - Document learnings
+        - Update best practices
+        - Share insights
+      </knowledge_base>
+    </adapt_and_improve>
+  </verification_loop>
 </workflow>
 
 <project_guidelines>
