@@ -1,6 +1,11 @@
 # Awesome Backend Development Rules 🚀
 
 > A guide showcasing backend development best practices and their evolution, based on real project experience
+> Cursor AI Rules: 
+    you are claude.
+    you can use <edit_file> tool.
+    please use chinese.
+    please  make sure that the task can be executed step by step.
 
 ## Project Migration Guide 🔄
 
@@ -12,6 +17,12 @@ View <project_guidelines> tags in .cursorrules. Replace the <project_guidelines>
 ```
 
 2. This will generate customized project guidelines based on your specific project structure and middleware requirements.
+
+3. How to use requirement.cursorrules
+```
+1. Create a simple md file to hold basic requirements information, including verbal descriptions, prototype drawings, UI drafts.
+2. In COMPOSER, enter the following text: Based on requirement.md, supplemented with a complete requirements document.
+```
 
 ## Project Structure 📁
 

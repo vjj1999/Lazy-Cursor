@@ -1,0 +1,194 @@
+<requirement_workflow>
+    <!-- 工作流定义 -->
+    <workflow>
+        <input_phase>
+            <business_requirement>
+                <format>
+                    <field name="feature_name" required="true">功能名称</field>
+                    <field name="description" required="true">功能描述</field>
+                    <field name="business_rules" type="array">业务规则列表</field>
+                    <field name="acceptance_criteria" type="array">验收标准列表</field>
+                </format>
+            </business_requirement>
+
+            <code_reuse_analysis>
+                <existing_patterns>
+                    <item>调度器模式</item>
+                    <item>队列配置</item>
+                    <item>监控指标</item>
+                    <item>异常处理</item>
+                </existing_patterns>
+
+                <naming_conventions>
+                    <item>数据库字段</item>
+                    <item>接口命名</item>
+                    <item>错误码</item>
+                    <item>日志格式</item>
+                </naming_conventions>
+
+                <integration_points>
+                    <item>消息队列</item>
+                    <item>缓存系统</item>
+                    <item>监控系统</item>
+                    <item>告警系统</item>
+                </integration_points>
+            </code_reuse_analysis>
+
+            <design_materials type="optional">
+                <item>产品原型</item>
+                <item>UI设计稿</item>
+                <item>流程图</item>
+            </design_materials>
+        </input_phase>
+
+        <analysis_phase>
+            <auto_analysis>
+                <reuse_analysis>
+                    <target>现有模块</target>
+                    <target>通用组件</target>
+                    <target>设计模式</target>
+                    <target>命名规范</target>
+                </reuse_analysis>
+
+                <code_analysis>
+                    <target>API定义</target>
+                    <target>数据模型</target>
+                    <target>验证规则</target>
+                    <target>错误处理</target>
+                </code_analysis>
+
+                <config_analysis>
+                    <target>安全配置</target>
+                    <target>性能配置</target>
+                    <target>中间件配置</target>
+                </config_analysis>
+
+                <metrics_analysis>
+                    <target>性能指标</target>
+                    <target>资源使用</target>
+                    <target>错误统计</target>
+                </metrics_analysis>
+            </auto_analysis>
+
+            <manual_confirmation>
+                <reuse_check>
+                    <item>是否最大程度复用现有代码</item>
+                    <item>是否遵循现有命名规范</item>
+                    <item>是否保持与现有系统一致</item>
+                    <item>是否避免重复造轮子</item>
+                </reuse_check>
+
+                <business_check>
+                    <item>业务流程完整性</item>
+                    <item>业务规则正确性</item>
+                    <item>边界条件合理性</item>
+                </business_check>
+
+                <technical_check>
+                    <item>技术方案合理性</item>
+                    <item>性能要求满足度</item>
+                    <item>安全要求满足度</item>
+                </technical_check>
+
+                <test_check>
+                    <item>测试场景完整性</item>
+                    <item>验收标准明确性</item>
+                </test_check>
+            </manual_confirmation>
+        </analysis_phase>
+
+        <output_phase>
+            <requirement_doc>
+                <section name="overview" required="true">
+                    <field>功能描述</field>
+                    <field>业务规则</field>
+                    <field>验收标准</field>
+                </section>
+
+                <section name="technical" required="true">
+                    <field auto="true">复用分析</field>
+                    <field auto="true">接口定义</field>
+                    <field auto="true">数据模型</field>
+                    <field confirm="true">业务流程</field>
+                    <field confirm="true">非功能需求</field>
+                </section>
+
+                <section name="test" required="true">
+                    <field confirm="true">测试场景</field>
+                    <field confirm="true">验收标准</field>
+                </section>
+            </requirement_doc>
+        </output_phase>
+    </workflow>
+
+    <!-- 验证规则 -->
+    <validation_rules>
+        <input_validation>
+            <rule>必填字段不能为空</rule>
+            <rule>业务规则至少包含一项</rule>
+            <rule>验收标准至少包含一项</rule>
+        </input_validation>
+
+        <reuse_validation>
+            <rule>优先使用现有实现</rule>
+            <rule>保持命名规范一致</rule>
+            <rule>遵循现有设计模式</rule>
+            <rule>复用现有集成点</rule>
+        </reuse_validation>
+
+        <analysis_validation>
+            <rule>所有自动分析项必须有结果</rule>
+            <rule>所有需确认项必须有确认记录</rule>
+        </analysis_validation>
+
+        <output_validation>
+            <rule>文档必须包含所有必需章节</rule>
+            <rule>自动生成内容必须完整</rule>
+            <rule>人工确认内容必须完整</rule>
+        </output_validation>
+    </validation_rules>
+
+    <!-- 反馈机制 -->
+    <feedback_loop>
+        <trigger_conditions>
+            <condition>需求变更</condition>
+            <condition>技术方案调整</condition>
+            <condition>验收标准修改</condition>
+        </trigger_conditions>
+
+        <actions>
+            <action>更新需求文档</action>
+            <action>重新进行相关分析</action>
+            <action>确认影响范围</action>
+            <action>更新相关内容</action>
+        </actions>
+    </feedback_loop>
+
+    <!-- 工具集成 -->
+    <tooling>
+        <requirement_parser>
+            <input_format>JSON/YAML</input_format>
+            <template_support>true</template_support>
+        </requirement_parser>
+
+        <code_analyzer>
+            <supported_languages>
+                <language>Go</language>
+                <language>SQL</language>
+            </supported_languages>
+            <analysis_rules>
+                <rule>接口定义提取</rule>
+                <rule>数据模型分析</rule>
+                <rule>验证规则检查</rule>
+            </analysis_rules>
+        </code_analyzer>
+
+        <doc_generator>
+            <output_formats>
+                <format>Markdown</format>
+                <format>HTML</format>
+            </output_formats>
+            <template_support>true</template_support>
+        </doc_generator>
+    </tooling>
+</requirement_workflow>
