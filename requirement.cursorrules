@@ -19,6 +19,29 @@
                     <item>异常处理</item>
                 </existing_patterns>
 
+                <robustness_patterns>
+                    <error_handling>
+                        <item>重试机制</item>
+                        <item>降级策略</item>
+                        <item>熔断机制</item>
+                        <item>超时控制</item>
+                    </error_handling>
+
+                    <recovery_mechanism>
+                        <item>任务恢复</item>
+                        <item>数据回滚</item>
+                        <item>状态重置</item>
+                        <item>资源释放</item>
+                    </recovery_mechanism>
+
+                    <monitoring_alerts>
+                        <item>错误率监控</item>
+                        <item>性能监控</item>
+                        <item>资源监控</item>
+                        <item>业务监控</item>
+                    </monitoring_alerts>
+                </robustness_patterns>
+
                 <naming_conventions>
                     <item>数据库字段</item>
                     <item>接口命名</item>
@@ -78,6 +101,29 @@
                     <item>是否避免重复造轮子</item>
                 </reuse_check>
 
+                <robustness_check>
+                    <error_handling>
+                        <item>是否实现错误重试机制</item>
+                        <item>是否定义重试策略和次数</item>
+                        <item>是否处理所有异常场景</item>
+                        <item>是否有降级和熔断方案</item>
+                    </error_handling>
+
+                    <recovery_check>
+                        <item>是否支持任务恢复</item>
+                        <item>是否保证数据一致性</item>
+                        <item>是否正确释放资源</item>
+                        <item>是否支持状态重置</item>
+                    </recovery_check>
+
+                    <monitoring_check>
+                        <item>是否实现关键指标监控</item>
+                        <item>是否设置合理告警阈值</item>
+                        <item>是否记录详细错误日志</item>
+                        <item>是否支持问题定位</item>
+                    </monitoring_check>
+                </robustness_check>
+
                 <business_check>
                     <item>业务流程完整性</item>
                     <item>业务规则正确性</item>
@@ -135,6 +181,29 @@
             <rule>遵循现有设计模式</rule>
             <rule>复用现有集成点</rule>
         </reuse_validation>
+
+        <robustness_validation>
+            <error_handling>
+                <rule>必须实现错误重试机制</rule>
+                <rule>必须定义重试策略和最大次数</rule>
+                <rule>必须处理所有可能的异常场景</rule>
+                <rule>必须实现服务降级和熔断机制</rule>
+            </error_handling>
+
+            <recovery_rules>
+                <rule>必须支持任务断点恢复</rule>
+                <rule>必须保证数据一致性</rule>
+                <rule>必须正确释放系统资源</rule>
+                <rule>必须支持服务状态重置</rule>
+            </recovery_rules>
+
+            <monitoring_rules>
+                <rule>必须实现关键指标监控</rule>
+                <rule>必须设置合理的告警阈值</rule>
+                <rule>必须记录详细的错误日志</rule>
+                <rule>必须支持问题快速定位</rule>
+            </monitoring_rules>
+        </robustness_validation>
 
         <analysis_validation>
             <rule>所有自动分析项必须有结果</rule>
