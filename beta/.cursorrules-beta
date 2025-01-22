@@ -1,0 +1,297 @@
+# Software Development Control System (v1.0)
+
+## Core Concepts
+PID Control Theory Implementation for Software Development:
+
+### P: Project Guidelines
+- Acts as proportional control
+- Provides immediate response to deviations
+- Directly controls current behavior through standards
+- Establishes baseline quality requirements
+
+### I: Workflow
+- Functions as integral control
+- Accumulates development experience
+- Eliminates systematic errors over time
+- Builds consistent execution patterns
+
+### D: Thinking Protocol
+- Serves as derivative control
+- Predicts potential issues
+- Provides dynamic adjustment
+- Prevents quality fluctuations
+
+## Shared Definitions
+
+### Quality Metrics
+code_quality:
+  - coverage: {unit: %, min: 80, target: 90}
+  - complexity: {cyclomatic: 10, cognitive: 15}
+  - performance: {response_time: 200ms, throughput: 1000rps}
+  - security: {vulnerability: 0, code_smell: low}
+
+process_metrics:
+  - efficiency: {cycle_time, lead_time}
+  - feedback: {time_to_detect, time_to_fix}
+  - improvement: {defect_reduction, quality_increase}
+
+prediction_metrics:
+  - accuracy: {risk_prediction, trend_analysis}
+  - prevention: {issue_prevention_rate, early_warning}
+  - optimization: {resource_efficiency, performance_gain}
+
+### Integration Points
+execution:
+  - standard_check: {entry_criteria, exit_criteria}
+  - quality_gate: {automated_check, manual_review}
+  - feedback_collection: {metrics, issues, improvements}
+
+feedback_paths:
+  - standards_feedback: P -> I
+  - execution_feedback: I -> D
+  - prediction_feedback: D -> I
+  - improvement_feedback: I -> P
+
+coordination:
+  - standards_to_execution: {guidelines, metrics, thresholds}
+  - execution_to_prediction: {patterns, trends, issues}
+  - prediction_to_execution: {risks, optimizations, suggestions}
+
+## Implementation
+
+### P: Project Guidelines
+#### Directory Structure
+- api/: API documentation and Swagger files
+- controller/: HTTP handlers
+- logic/: Business logic
+- repository/:
+  * dto/: Request objects
+  * vo/: Response objects
+  * model/: Database models
+- services/:
+  * xxx_service/: Complex business services
+  * xxx/: Utility services
+- middleware/: Global middleware
+- third_party/: Third-party integrations
+- constant/:
+  * errcode/: Error codes
+- tests/: Test files
+- util/: Utility functions
+- scripts/: Database migration scripts
+
+#### Naming Conventions
+- Files: snake_case (webhook_controller.go)
+- Controller: webhook_controller.go
+- Logic: webhook_logic.go
+- DTO: create_webhook_dto.go
+- VO: webhook_vo.go
+- Model: webhook.go
+- Test: {file_name}_test.go
+- Service: paypal.go, mailchimp.go
+
+#### Layer Standards
+controller_standards:
+  - Use application.TraceCtx(ctx)
+  - Return echo.Success/Error
+  - Add swagger annotations
+  - Use gin.Context as parameter
+  - Check authentication with jwt_token
+  - Validate input with ShouldBind
+  swagger_annotations:
+    - @Summary: Brief description
+    - @Description: Detailed description
+    - @Tags: API grouping
+    - @Produce: Response content type
+    - @Param: Request parameters
+    - @Success: Success response
+    - @Router: API path and method
+
+logic_standards:
+  - Accept context as first param
+  - Return domain errors
+  - Handle transactions
+  business_validation:
+    - Input parameter validation
+    - Business rule validation
+    - State validation
+  transaction_handling:
+    - Use model.BeginCtxTx
+    - Proper error handling
+    - Rollback on errors
+  error_handling:
+    - Use errcode for business errors
+    - Wrap errors with context
+    - Log errors appropriately
+
+repository_standards:
+  dto:
+    - All request parameters in /repository/dto
+    - Validation tags required
+    - Conversion methods to models
+    - Default value handling
+  vo:
+    - All response structures in /repository/vo
+    - Conversion methods from models
+    - Proper JSON tags
+    - Documentation for fields
+  model:
+    - Define proper indexes
+    - Use appropriate field types
+    - Include field comments
+    - Database operations in /repository/model
+
+#### Quality Control
+metrics: @quality_metrics.code_quality
+monitoring: @integration_points.execution
+feedback: @feedback_paths.standards_feedback
+
+### I: Workflow
+#### TDD Process
+test_first:
+  standards: @P.testing_standards
+  experience: @I.feedback_loop
+  prediction: @D.development_thinking
+  steps:
+    - Write failing test
+    - Define expected behavior
+    - Set up test environment
+    - Prepare test data
+
+implementation:
+  standards: @P.implementation_standards
+  patterns: @I.knowledge_base
+  guidance: @D.implementation_thinking
+  steps:
+    - Implement minimal code
+    - Make test pass
+    - Local verification
+    - Code review
+
+refactoring:
+  standards: @P.refactoring_standards
+  patterns: @I.optimization_patterns
+  analysis: @D.quality_prediction
+  steps:
+    - Code optimization
+    - Design improvement
+    - Performance tuning
+    - Documentation update
+
+validation:
+  metrics: @quality_metrics.code_quality
+  gates: @integration_points.quality_gate
+  feedback: @feedback_paths.execution_feedback
+  steps:
+    - Run all tests
+    - Check coverage
+    - Verify requirements
+    - Quality metrics check
+
+#### Automation Support
+test_automation:
+  generation:
+    templates:
+      - Unit test templates
+      - Integration test templates
+      - Performance test templates
+      - Security test templates
+    scenarios:
+      - API endpoints analysis
+      - Business rules parsing
+      - Data flow tracking
+      - State transitions
+    cases:
+      - Normal cases
+      - Edge cases
+      - Error cases
+      - Boundary conditions
+    data:
+      - Test data generation
+      - Mock service responses
+      - Database fixtures
+      - Environment setup
+
+  execution:
+    - Automated test runs
+    - Real-time results
+    - Coverage analysis
+    - Performance metrics
+
+  feedback:
+    analysis:
+      - Test failure patterns
+      - Coverage gaps
+      - Performance bottlenecks
+      - Quality issues
+    guidance:
+      - Implementation suggestions
+      - Optimization recommendations
+      - Refactoring proposals
+      - Quality improvements
+
+#### Feedback System
+collection:
+  metrics: @quality_metrics
+  points: @integration_points.execution
+  paths: @feedback_paths
+
+analysis:
+  patterns: @I.knowledge_base
+  trends: @D.trend_analysis
+  impacts: @D.impact_assessment
+
+improvement:
+  standards: @P.quality_control
+  process: @I.optimization_patterns
+  prediction: @D.adjustment_guidance
+
+### D: Thinking Protocol
+#### Predictive Control
+trend_analysis:
+  - Pattern recognition
+  - Historical data analysis
+  - Future trend prediction
+  - Risk assessment
+
+dynamic_adjustment:
+  - Real-time strategy adaptation
+  - Process optimization
+  - Resource allocation
+  - Priority adjustment
+
+preventive_measures:
+  - Early warning system
+  - Risk mitigation strategies
+  - Proactive optimization
+  - Quality assurance methods
+
+#### Development Thinking
+requirement_phase:
+  - Business value analysis
+  - Technical feasibility assessment
+  - Risk prediction
+  - Resource estimation
+
+design_phase:
+  - Architecture pattern matching
+  - Component interaction analysis
+  - Performance bottleneck prediction
+  - Security risk assessment
+
+implementation_phase:
+  - Code pattern recognition
+  - Quality issue prediction
+  - Optimization opportunity identification
+  - Technical debt assessment
+
+testing_phase:
+  - Test coverage analysis
+  - Bug pattern recognition
+  - Performance bottleneck detection
+  - Security vulnerability prediction
+
+deployment_phase:
+  - Deployment risk assessment
+  - Resource usage prediction
+  - Performance impact analysis
+  - Rollback strategy planning
