@@ -120,7 +120,7 @@ Use codebase_search and View <# Project Guidelines> tags in .cursorrules. Replac
    - 原型图
    - UI 草图
    
-2. 在 Composer 中将 requirement.cursorrules 加入上下文（@Suggested），输入：
+2. 在 Composer 中将 `requirement.md` 和 `.cursorrules` 加入上下文（@Suggested），输入：
 ```
 Based on requirement.md, supplemented with a complete requirements document.
 ```
