@@ -102,7 +102,6 @@ project_root/
   ├── util/            # 工具函数
   └── scripts/         # 数据库迁移脚本
 ```
-
 ## 项目规范生成 📝
 
 ### 1. 项目规范
@@ -153,6 +152,27 @@ Based on requirement.md, supplemented with a complete requirements document.
 - `@folder`: 添加文件夹到上下文
 - `@web`: 使用网络信息
 - `@git`: 添加 git 上下文
+
+## 工具使用指南 (introduction4cursor.md)
+
+这是一个全面的cursor指令集，帮助开发者更高效地控制cursor：
+
+### 1. 代码搜索工具 🔍
+- **codebase_search**: 语义化代码搜索，适用于理解功能和查找相似实现
+- **grep_search**: 精确文本/正则搜索，适用于查找具体的函数或变量
+- **file_search**: 模糊文件名搜索，帮助快速定位文件
+
+### 2. 文件操作工具 📁
+- **read_file**: 读取文件内容，查看代码实现
+- **edit_file**: 修改文件内容，进行代码更新
+- **delete_file**: 删除不需要的文件
+- **list_dir**: 浏览目录结构
+
+### 3. 命令执行工具 ⚡️
+- **run_terminal_cmd**: 执行终端命令，支持各种命令行操作
+
+### 4. 编辑修复工具 ✏️
+- **reapply**: 重新应用上一次的编辑，优化编辑结果
 
 ## 开发流程最佳实践 💡
 
