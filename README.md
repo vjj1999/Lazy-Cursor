@@ -110,7 +110,7 @@ project_root/
 2. 打开 Composer（`Cmd/Ctrl + Shift + P`）
 3. 输入指令生成规范：
 ```
-Use codebase_search and View <project_guidelines> tags in .cursorrules. Replace the <project_guidelines> tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines.
+Use codebase_search and View <# Project Guidelines> tags in .cursorrules. Replace the <# Project Guidelines> tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines.
 ```
 
 ### 2. 需求文档生成
