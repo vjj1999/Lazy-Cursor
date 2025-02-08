@@ -1,3 +1,54 @@
+<!--
+# PID Control Theory in Software Development
+
+> This rules system implements PID (Proportional-Integral-Derivative) control theory for software development,
+> providing a scientific approach to process control and quality assurance.
+
+## Core Concepts
+1. P (Project Guidelines): Direct control through standards
+2. I (Workflow): Continuous execution and experience accumulation  
+3. D (Thinking Protocol): Predictive analysis and dynamic adjustment
+
+## Control System Design
+
+### 1. Project Guidelines (P)
+@type: proportional_control
+- Acts as proportional control
+- Provides immediate response to deviations
+- Directly controls current behavior through standards
+- Establishes baseline quality requirements
+
+### 2. Workflow (I) 
+@type: integral_control
+- Functions as integral control
+- Accumulates development experience
+- Eliminates systematic errors over time
+- Builds consistent execution patterns
+
+### 3. Thinking Protocol (D)
+@type: derivative_control  
+- Serves as derivative control
+- Predicts potential issues
+- Provides dynamic adjustment
+- Prevents quality fluctuations
+
+## Control Loop Process
+
+### 1. Standards Application (P)
+- Apply project guidelines
+- Check against quality metrics
+- Provide immediate feedback
+
+### 2. Experience Integration (I)
+- Execute development workflow
+- Accumulate best practices
+- Build systematic improvements
+
+### 3. Predictive Optimization (D)
+- Apply thinking protocol
+- Anticipate potential issues
+- Make proactive adjustments
+-->
 # Project Guidelines
 @type: proportional_control
 @description: Provides immediate quality control through standards and metrics
