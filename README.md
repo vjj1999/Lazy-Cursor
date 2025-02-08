@@ -113,18 +113,6 @@ project_root/
 Use codebase_search and View <# Project Guidelines> tags in .cursorrules. Replace the <# Project Guidelines> tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines.
 ```
 
-### 2. 需求文档生成
-
-1. 创建 `requirement.md` 文件，包含：
-   - 需求描述
-   - 原型图
-   - UI 草图
-   
-2. 在 Composer 中将 requirement.cursorrules 加入上下文（@Suggested），输入：
-```
-Based on requirement.md, supplemented with a complete requirements document.
-```
-
 ## Cursor 使用指南 🛠️
 
 ### 1. 模型选择
@@ -320,6 +308,18 @@ AI 助手将分析代码并提供优化建议。
 ```
 
 AI 助手将生成符合规范的文档注释。
+
+### 4. 需求文档生成
+
+1. 创建 `requirement.md` 文件，包含：
+   - 需求描述
+   - 原型图
+   - UI 草图
+   
+2. 在 Composer 中将 requirement.cursorrules 加入上下文（@Suggested），输入：
+```
+Based on requirement.md, supplemented with a complete requirements document.
+```
 
 ## 最佳实践 👍
 
