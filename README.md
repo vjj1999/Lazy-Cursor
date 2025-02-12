@@ -104,13 +104,21 @@ project_root/
 ```
 ## 项目规范生成 📝
 
-### 1. 项目规范
+### 1. Cursor
 
 1. 确保 `.cursorrules` 位于根目录
 2. 打开 Composer（`Cmd/Ctrl + Shift + P`）
 3. 输入指令生成规范：
 ```
 Use codebase_search and View <# Project Guidelines> tags in .cursorrules. Replace the <# Project Guidelines> tags in .cursorrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines.
+```
+### 2. Windserf
+
+1. 确保 `.windsurfrules` 位于根目录
+2. 打开 Cascade
+3. 输入指令生成规范：
+```
+Use codebase_search and View <# Project Guidelines> tags in .windsurfrules. Just Replace the <# Project Guidelines> tags in .windsurfrules according to the project structure and the corresponding Unified Middleware. The content of the tags is required to meet the needs of the workflow and strictly express the project guidelines. Finally add this file to your memory. 
 ```
 
 ## Cursor 使用指南 🛠️
